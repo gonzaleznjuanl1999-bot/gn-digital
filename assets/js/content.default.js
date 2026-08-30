@@ -149,6 +149,38 @@
         image: "assets/img/work/gravity.webp",
         url: "",
         tags: ["Web", "Animación", "Premium", "SEO"]
+      },
+      {
+        name: "Checkout & Pagos",
+        category: "E-commerce",
+        desc: "Proceso de compra optimizado con 8 pasarelas: tarjeta, PayPal, Klarna, SEPA, cripto y más, con confirmación por email.",
+        image: "assets/img/work/checkout.webp",
+        url: "",
+        tags: ["Checkout", "8 pasarelas", "Cripto", "Emails"]
+      },
+      {
+        name: "CRM & Pedidos",
+        category: "Sistema de gestión",
+        desc: "Gestión completa de pedidos: estados, devoluciones, tracking, etiquetas y export CSV en un solo clic.",
+        image: "assets/img/work/orders.webp",
+        url: "",
+        tags: ["Pedidos", "Devoluciones", "Tracking", "CSV"]
+      },
+      {
+        name: "Finanzas & Facturación",
+        category: "Dashboard",
+        desc: "Ventas, impuestos, facturas con numeración automática y conciliación bancaria en tiempo real.",
+        image: "assets/img/work/finance.webp",
+        url: "",
+        tags: ["Ventas", "IVA", "Facturas", "Conciliación"]
+      },
+      {
+        name: "Catálogo & Productos",
+        category: "E-commerce",
+        desc: "Editor de productos con variantes, precios, SEO, stock por talla y proveedores vinculados.",
+        image: "assets/img/work/products.webp",
+        url: "",
+        tags: ["Productos", "Variantes", "SEO", "Stock"]
       }
     ],
     testimonials: [
