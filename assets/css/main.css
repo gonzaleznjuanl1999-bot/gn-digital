@@ -431,9 +431,22 @@ main, footer { position: relative; z-index: 1; }
   border: 1px solid var(--line); border-radius: 100px; padding: 4px 11px;
   background: rgba(255, 255, 255, 0.02);
 }
-.work-link { font-family: var(--mono); font-size: 13px; color: var(--text); display: inline-flex; align-items: center; gap: 8px; }
-.work-link::before { content: '→'; color: var(--violet); transition: transform 0.25s; }
-.work-card:hover .work-link::before { transform: translateX(4px); }
+.work-link {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-family: var(--mono); font-size: 13px; font-weight: 600;
+  color: #0a0a0c; background: var(--grad);
+  border: 1px solid transparent; border-radius: 10px; padding: 10px 18px;
+  transition: transform 0.25s var(--ease), box-shadow 0.25s, filter 0.25s;
+}
+.work-link:hover { transform: translateY(-2px); box-shadow: 0 10px 26px -10px rgba(216, 184, 120, 0.7); }
+.work-link .wl-arrow { transition: transform 0.25s var(--ease); }
+.work-link:hover .wl-arrow { transform: translateX(4px); }
+.work-link.is-internal {
+  color: var(--muted); background: transparent;
+  border: 1px dashed var(--line-2); cursor: default;
+  box-shadow: none;
+}
+.work-link.is-internal:hover { transform: none; }
 
 /* ---------- Proceso ---------- */
 .process { padding: 130px 0 0; position: relative; }

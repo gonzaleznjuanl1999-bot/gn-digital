@@ -146,7 +146,11 @@
     var items = (merged.portfolio || []).filter(Boolean);
     grid.innerHTML = items.map(function (p) {
       var tags = (p.tags || []).map(function (t) { return '<span>' + esc(t) + '</span>'; }).join('');
-      var link = p.url ? '<a class="work-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">Ver proyecto</a>' : '<span class="work-link">Caso interno</span>';
+      var seeTxt = setText('labels.workSee', 'Ver proyecto');
+      var internalTxt = setText('labels.workInternal', 'Caso interno');
+      var link = p.url
+        ? '<a class="work-link" href="' + esc(p.url) + '" target="_blank" rel="noopener">' + esc(seeTxt) + ' <span class="wl-arrow">→</span></a>'
+        : '<span class="work-link is-internal">' + esc(internalTxt) + '</span>';
       var img = p.image ? '<img src="' + esc(p.image) + '" alt="' + esc(p.name) + '" loading="lazy" decoding="async">' : '';
       var urlPill = p.url ? esc(p.url).replace(/^https?:\/\//, '') : 'gn.digital/caso';
       return '<article class="work-card" data-reveal>' +

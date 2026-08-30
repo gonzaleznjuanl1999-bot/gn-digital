@@ -34,6 +34,7 @@
       ctaT1: "¿Construimos", ctaT2: "lo tuyo",
       ctaSub: "Cuéntanos tu idea o tu problema. En 24h te respondemos con un plan claro, precio y tiempo de entrega.",
       ctaWhatsapp: "💬 WhatsApp", ctaEmail: "✉ Escríbenos un email",
+      workSee: "Ver proyecto", workInternal: "Caso interno",
       scroll: "scroll",
       footNav: "Navegación", footServices: "Servicios", footContact: "Contacto",
       footRights: "Todos los derechos reservados"
@@ -124,7 +125,7 @@
         category: "E-commerce",
         desc: "Plataforma multi-idioma con 6 idiomas, multi-tienda, pagos reales, facturas PDF e inventario en tiempo real.",
         image: "assets/img/work/tienda.webp",
-        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/",
         tags: ["E-commerce", "6 idiomas", "Pagos reales", "PWA"]
       },
       {
@@ -156,7 +157,7 @@
         category: "E-commerce",
         desc: "Proceso de compra optimizado con 8 pasarelas: tarjeta, PayPal, Klarna, SEPA, cripto y más, con confirmación por email.",
         image: "assets/img/work/checkout.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/#/checkout",
         tags: ["Checkout", "8 pasarelas", "Cripto", "Emails"]
       },
       {
@@ -180,7 +181,7 @@
         category: "E-commerce",
         desc: "Editor de productos con variantes, precios, SEO, stock por talla y proveedores vinculados.",
         image: "assets/img/work/products.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/#/shop",
         tags: ["Productos", "Variantes", "SEO", "Stock"]
       }
     ],
@@ -260,6 +261,7 @@
       ctaT1: "Bauen wir", ctaT2: "deins",
       ctaSub: "Erzähl uns von deiner Idee oder deinem Problem. Innerhalb von 24 Stunden erhältst du einen klaren Plan mit Preis und Lieferzeit.",
       ctaWhatsapp: "💬 WhatsApp", ctaEmail: "✉ Schreib uns eine E-Mail",
+      workSee: "Projekt ansehen", workInternal: "Internes Projekt",
       scroll: "scrollen",
       footNav: "Navigation", footServices: "Leistungen", footContact: "Kontakt",
       footRights: "Alle Rechte vorbehalten"
@@ -350,7 +352,7 @@
         category: "E-Commerce",
         desc: "Mehrsprachige Plattform mit 6 Sprachen, Multi-Store, echten Zahlungen, PDF-Rechnungen und Inventar in Echtzeit.",
         image: "assets/img/work/tienda.webp",
-        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/",
         tags: ["E-Commerce", "6 Sprachen", "Echte Zahlungen", "PWA"]
       },
       {
@@ -382,7 +384,7 @@
         category: "E-Commerce",
         desc: "Optimierter Kaufprozess mit 8 Zahlungsanbietern: Karte, PayPal, Klarna, SEPA, Krypto u. v. m. — mit E-Mail-Bestätigung.",
         image: "assets/img/work/checkout.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/#/checkout",
         tags: ["Checkout", "8 Anbieter", "Krypto", "E-Mails"]
       },
       {
@@ -406,7 +408,7 @@
         category: "E-Commerce",
         desc: "Produkt-Editor mit Varianten, Preisen, SEO, Lagerbestand pro Grösse und verknüpften Lieferanten.",
         image: "assets/img/work/products.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app/#/shop",
         tags: ["Produkte", "Varianten", "SEO", "Bestand"]
       }
     ],
