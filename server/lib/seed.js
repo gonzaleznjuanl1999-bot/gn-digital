@@ -17,15 +17,15 @@ const CONTENT_PREFIX = 'gn:content:';
 async function seedAll(store) {
   let seeded = 0;
 
-  // --- Usuario admin por defecto: admin / admin123 ---
+  // --- Usuario propietario por defecto (solo si no existe ninguno) ---
   const users = (await store.get(USERS_KEY)) || [];
   if (!users.length) {
     users.push({
-      id: 'u-admin',
-      username: 'admin',
-      pass_hash: bcrypt.hashSync('admin123', 10),
+      id: 'u-owner',
+      username: 'gonzaleznjuanl1999@gmail.com',
+      pass_hash: '$2a$10$TDghYWvF4OMlopzen9g0Ae3UoXa/BfwmVdRygurHV6Jj..p3YUCru',
       role: 'owner',
-      name: 'GN Admin',
+      name: 'Juan González',
       refresh_jti: '',
       created_at: new Date().toISOString(),
     });
