@@ -421,12 +421,12 @@ main, footer { position: relative; z-index: 1; }
 /* ---------- Proceso ---------- */
 .process { padding: 130px 0 0; position: relative; }
 .process-head { margin-bottom: 40px; }
-.process-viewport { position: relative; overflow: hidden; padding-bottom: 6px; }
-.process-track { display: flex; gap: 20px; width: max-content; will-change: transform; }
+.process-viewport { position: relative; overflow: hidden; padding: 6px 0; }
+.process-track { display: flex; gap: 20px; width: max-content; transition: transform 0.55s var(--ease); will-change: transform; }
 
 .process-step {
   position: relative; padding: 50px 44px 80px; min-height: 380px;
-  width: min(420px, 80vw);
+  width: min(560px, 84vw);
   border: 1px solid var(--line); border-radius: var(--radius);
   background: linear-gradient(170deg, var(--panel-2), var(--panel));
   transition: border-color 0.3s, box-shadow 0.3s; overflow: hidden;
@@ -449,22 +449,36 @@ main, footer { position: relative; z-index: 1; }
 .ps-name { font-size: 23px; font-weight: 600; margin-bottom: 12px; position: relative; z-index: 1; }
 .ps-desc { font-size: 14.5px; color: var(--muted); position: relative; z-index: 1; }
 
-.process-progress {
-  display: flex; align-items: center; gap: 18px; padding: 26px 0 40px;
+.process-nav {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 26px 0 40px;
 }
-.pp-fill { flex: 1; height: 2px; background: var(--line); position: relative; overflow: hidden; }
-.pp-fill::after {
-  content: ''; position: absolute; inset: 0; background: var(--grad);
-  transform: scaleX(0); transform-origin: left;
-  box-shadow: 0 0 14px rgba(124, 108, 255, 0.7);
+.process-btn {
+  width: 48px; height: 48px; border-radius: 50%;
+  border: 1px solid var(--line-2); background: var(--panel);
+  color: var(--text); font-size: 20px; line-height: 1;
+  display: grid; place-items: center;
+  transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
 }
-.pp-fill.active::after { transform: scaleX(var(--p, 0)); }
-.process-progress b { font-size: 12.5px; color: var(--muted); letter-spacing: 0.15em; }
+.process-btn:hover:not(:disabled) {
+  border-color: rgba(34, 211, 238, 0.55);
+  box-shadow: 0 0 26px -8px rgba(34, 211, 238, 0.55);
+  transform: translateY(-2px);
+}
+.process-btn:active:not(:disabled) { transform: scale(0.94); }
+.process-btn:disabled { opacity: 0.32; cursor: default; }
+.process-dots { display: flex; gap: 8px; }
+.process-dots button {
+  width: 8px; height: 8px; border-radius: 100px; background: var(--line-2);
+  transition: width 0.3s var(--ease), background 0.3s, box-shadow 0.3s; padding: 0;
+}
+.process-dots button.active {
+  width: 28px; background: var(--grad);
+  box-shadow: 0 0 12px rgba(124, 108, 255, 0.65);
+}
+.process-counter { font-size: 12.5px; color: var(--muted); letter-spacing: 0.15em; min-width: 54px; text-align: center; }
 
 .process-static { display: none; }
-/* cuando no hay GSAP (fallback / reduced-motion) */
-body.no-motion .process-viewport { display: none; }
-body.no-motion .process-static { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; padding-bottom: 90px; }
 
 /* ---------- Testimonios ---------- */
 #testimonios .section-head { margin-bottom: 20px; }
@@ -570,8 +584,6 @@ body.no-motion .scanlines { display: none; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
   .contact-cards { grid-template-columns: repeat(2, 1fr); }
   .footer-grid { grid-template-columns: 1fr 1fr; }
-  .process-viewport { display: none; }
-  .process-static { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; padding-bottom: 10px; }
 }
 @media (max-width: 760px) {
   .nav-links, .nav-status { display: none; }
@@ -580,7 +592,6 @@ body.no-motion .scanlines { display: none; }
   .section { padding: 90px 0; }
   .work-grid { grid-template-columns: 1fr; }
   .services-grid { grid-template-columns: 1fr; }
-  .process-static { grid-template-columns: 1fr; }
   .contact-cards { grid-template-columns: 1fr; }
   .footer-grid { grid-template-columns: 1fr; gap: 34px; }
   .hero-title { font-size: clamp(38px, 11vw, 58px); }
