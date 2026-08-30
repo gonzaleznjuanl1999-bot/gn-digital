@@ -219,10 +219,10 @@
     ],
     contact: {
       email: "hola@gndigital.tech",
-      phone: "+34 600 123 456",
-      whatsapp: "34600123456",
-      city: "España · Trabajamos en remoto",
-      hours: "Lun–Vie · 9:00–19:00",
+      phone: "+58 424 5761431",
+      whatsapp: "584245761431",
+      city: "Nivel mundial · Trabajamos en remoto",
+      hours: "Lun–Sáb · 9:00–19:00",
       socials: [
         { name: "Instagram", url: "#" },
         { name: "LinkedIn", url: "#" },
@@ -446,10 +446,10 @@
     ],
     contact: {
       email: "hola@gndigital.tech",
-      phone: "+34 600 123 456",
-      whatsapp: "34600123456",
-      city: "Spanien · Arbeit im Remote-Modus",
-      hours: "Mo–Fr · 9:00–19:00",
+      phone: "+58 424 5761431",
+      whatsapp: "584245761431",
+      city: "Weltweit · Remote-Arbeit",
+      hours: "Mo–Sa · 9:00–19:00",
       socials: [
         { name: "Instagram", url: "#" },
         { name: "LinkedIn", url: "#" },
