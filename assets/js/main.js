@@ -363,13 +363,14 @@
     }
     gsap.registerPlugin(window.ScrollTrigger);
 
-    // reveals con stagger en lote
+    // reveals con IntersectionObserver: el estado inicial oculto lo pone el
+    // CSS ([data-reveal]/[data-reveal]/[.r-up] opacity:0) y .revealed lo
+    // revierte con transición. NUNCA inline: ganaría a la clase y el
+    // elemento quedaría invisible para siempre.
     var targets = $all('[data-reveal], .r-up, .reveal');
     targets.forEach(function (el) {
-      el.style.opacity = '0';
-      el.style.transform = 'translateY(26px)';
       var d = parseFloat(el.getAttribute('data-delay') || 0) || 0;
-      el.style.transition = 'opacity .9s cubic-bezier(.22,1,.36,1) ' + d + 's, transform .9s cubic-bezier(.22,1,.36,1) ' + d + 's';
+      if (d) el.style.transitionDelay = d + 's';
     });
     var io = new IntersectionObserver(function (entries) {
       entries.forEach(function (en) {
@@ -390,13 +391,13 @@
       });
     });
 
-    // hero parallax
-    gsap.to('.hero-copy', {
-      y: -40, opacity: 0.35, ease: 'none',
+    // hero parallax (fromTo: nunca captura el estado oculto del reveal)
+    gsap.fromTo('.hero-top', { y: 0, opacity: 1 }, {
+      y: -50, opacity: 0.35, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
     });
-    gsap.to('.terminal', {
-      y: -70, opacity: 0.3, ease: 'none',
+    gsap.fromTo('.terminal', { y: 0, opacity: 1 }, {
+      y: -90, opacity: 0.25, ease: 'none',
       scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: 1 }
     });
 
@@ -438,6 +439,30 @@
   }
 
   // ============================================================
+  // Ajuste del título del hero: reduce el tamaño hasta que quepa
+  // en 2 líneas exactas (el texto es editable desde el CMS).
+  // Siempre recalcula desde la base CSS (puede crecer y encoger).
+  // ============================================================
+  function fitHeroTitle() {
+    var h1 = $('.hero-title');
+    if (!h1) return;
+    h1.style.fontSize = ''; // base CSS (clamp)
+    var fs = parseFloat(getComputedStyle(h1).fontSize) || 64;
+    function shrink() {
+      h1.style.fontSize = fs + 'px';
+      var lh = parseFloat(getComputedStyle(h1).lineHeight) || fs * 1.05;
+      // 2 líneas ≈ 2.13×lh (fragmento de línea fantasma); 3+ líneas ≈ 3.1×
+      if (h1.scrollHeight > lh * 2.3 && fs > 38) { fs -= 1; shrink(); }
+    }
+    shrink();
+  }
+  var fitTimer = null;
+  function fitHeroTitleDebounced() {
+    clearTimeout(fitTimer);
+    fitTimer = setTimeout(fitHeroTitle, 150);
+  }
+
+  // ============================================================
   // Boot
   // ============================================================
   document.addEventListener('DOMContentLoaded', function () {
@@ -447,6 +472,11 @@
       playTerminal();
       initCanvas();
       initMotion();
+      fitHeroTitle();
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(fitHeroTitle);
+      }
+      window.addEventListener('resize', fitHeroTitleDebounced, { passive: true });
     });
   });
 })();
