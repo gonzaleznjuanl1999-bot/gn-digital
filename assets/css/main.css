@@ -424,6 +424,32 @@ main, footer { position: relative; z-index: 1; }
 .process-viewport { position: relative; overflow: hidden; padding: 6px 0; }
 .process-track { display: flex; gap: 20px; width: max-content; transition: transform 0.55s var(--ease); will-change: transform; }
 
+.process-btn {
+  position: absolute; top: 50%; margin-top: -25px; z-index: 6;
+  width: 50px; height: 50px; border-radius: 50%;
+  border: 1px solid var(--line-2);
+  background: rgba(10, 13, 22, 0.82); backdrop-filter: blur(10px);
+  color: var(--text); font-size: 22px; line-height: 1;
+  display: grid; place-items: center;
+  box-shadow: 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+  transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
+}
+#procPrev { left: max(10px, calc(50% - min(280px, 42vw) - 36px)); }
+#procNext { right: max(10px, calc(50% - min(280px, 42vw) - 36px)); }
+.process-btn:hover:not(:disabled) {
+  border-color: rgba(34, 211, 238, 0.6);
+  box-shadow: 0 0 30px -6px rgba(34, 211, 238, 0.6), 0 10px 30px -12px rgba(0, 0, 0, 0.8);
+  transform: translateY(-2px);
+}
+.process-btn:active:not(:disabled) { transform: scale(0.93); }
+.process-btn:disabled { opacity: 0.3; cursor: default; }
+
+.process-nav {
+  display: flex; align-items: center; justify-content: center; gap: 22px;
+  padding: 26px 0 40px;
+}
+.process-dots { display: flex; gap: 8px; }
+
 .process-step {
   position: relative; padding: 50px 44px 80px; min-height: 380px;
   width: min(560px, 84vw);
@@ -453,20 +479,6 @@ main, footer { position: relative; z-index: 1; }
   display: flex; align-items: center; justify-content: center; gap: 22px;
   padding: 26px 0 40px;
 }
-.process-btn {
-  width: 48px; height: 48px; border-radius: 50%;
-  border: 1px solid var(--line-2); background: var(--panel);
-  color: var(--text); font-size: 20px; line-height: 1;
-  display: grid; place-items: center;
-  transition: transform 0.25s var(--ease), border-color 0.25s, box-shadow 0.25s, opacity 0.25s;
-}
-.process-btn:hover:not(:disabled) {
-  border-color: rgba(34, 211, 238, 0.55);
-  box-shadow: 0 0 26px -8px rgba(34, 211, 238, 0.55);
-  transform: translateY(-2px);
-}
-.process-btn:active:not(:disabled) { transform: scale(0.94); }
-.process-btn:disabled { opacity: 0.32; cursor: default; }
 .process-dots { display: flex; gap: 8px; }
 .process-dots button {
   width: 8px; height: 8px; border-radius: 100px; background: var(--line-2);
