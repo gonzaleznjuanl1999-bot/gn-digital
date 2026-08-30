@@ -411,7 +411,7 @@
       var fill = $('#processFill'), count = $('#processCount');
       var tl = gsap.timeline({
         scrollTrigger: {
-          trigger: '.process', start: 'top top', end: function () { return '+=' + (dist() + 600); },
+          trigger: '.process', start: 'top top', end: function () { return '+=' + (dist() + 200); },
           scrub: 1, pin: true, invalidateOnRefresh: true,
           onUpdate: function (self) {
             if (fill) fill.style.setProperty('--p', self.progress);

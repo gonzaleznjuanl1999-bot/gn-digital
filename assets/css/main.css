@@ -380,6 +380,7 @@ main, footer { position: relative; z-index: 1; }
 .stat-label { font-family: var(--mono); font-size: 12.5px; color: var(--muted); margin-top: 8px; letter-spacing: 0.05em; }
 
 /* ---------- Trabajo ---------- */
+#trabajo { padding-bottom: 40px; }
 .work-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
 
 .work-card {
@@ -419,8 +420,8 @@ main, footer { position: relative; z-index: 1; }
 .work-card:hover .work-link::before { transform: translateX(4px); }
 
 /* ---------- Proceso ---------- */
-.process { padding: 130px 0 0; position: relative; }
-.process-head { margin-bottom: 40px; }
+.process { padding: 40px 0 0; position: relative; }
+.process-head { margin-bottom: 24px; }
 .process-viewport { position: relative; overflow: hidden; padding-bottom: 6px; }
 .process-track { display: flex; gap: 20px; width: max-content; will-change: transform; }
 
