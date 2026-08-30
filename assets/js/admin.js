@@ -39,7 +39,6 @@
       { key: 'name', label: 'Nombre', type: 'text' },
       { key: 'desc', label: 'Descripción', type: 'textarea' },
       { key: 'features', label: 'Características', type: 'stringlist', itemLabel: 'Característica' },
-      { key: 'price', label: 'Precio (ej: desde $899)', type: 'text' },
       { key: 'featured', label: 'Destacada (más grande)', type: 'checkbox' }
     ]},
     { key: 'stats', label: 'Cifras', icon: '▦', desc: 'Números de la banda de métricas', type: 'list', itemLabel: 'Cifra', itemIcon: '▦', sub: [

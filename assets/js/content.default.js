@@ -63,7 +63,6 @@
         name: "Páginas Web Corporativas",
         desc: "Tu presencia digital profesional: rápida, segura y diseñada para convertir visitas en clientes.",
         features: ["Diseño premium a medida", "Carga ultrarrápida (Core Web Vitals)", "Posicionamiento SEO desde el día uno", "Panel para editar tu contenido"],
-        price: "desde $349",
         featured: false
       },
       {
@@ -71,7 +70,6 @@
         name: "E-commerce & Tiendas Online",
         desc: "Tiendas completas con pagos reales, facturas, inventario y multi-idioma. La plataforma que ya usan nuestros clientes.",
         features: ["Pagos: tarjeta, PayPal, cripto y más", "Inventario y stock automático", "Facturación y reportes", "6 idiomas desde el primer día"],
-        price: "desde $899",
         featured: true
       },
       {
@@ -79,7 +77,6 @@
         name: "Sistemas de Inventario",
         desc: "Controla tu stock, proveedores y alertas de reposición en tiempo real. Nunca más pierdas una venta por falta de stock.",
         features: ["Stock en tiempo real", "Alertas de reposición", "Ledger de movimientos", "Proveedores y reordenes"],
-        price: "desde $699",
         featured: false
       },
       {
@@ -87,7 +84,6 @@
         name: "SEO & Marketing Digital",
         desc: "Atrae tráfico de calidad y convierte. Posicionamiento, campañas y analítica con reportes claros cada mes.",
         features: ["SEO técnico y de contenido", "Campañas en redes", "Google Analytics & Search Console", "Reportes mensuales"],
-        price: "desde $249/mes",
         featured: false
       },
       {
@@ -95,7 +91,6 @@
         name: "Sistemas & Apps a Medida",
         desc: "Software que no existe en ningún catálogo: automatizaciones, paneles, integraciones y APIs para tu operación.",
         features: ["Automatización de procesos", "Paneles de control", "Integración con tus herramientas", "Escalable desde el día uno"],
-        price: "a medida",
         featured: false
       },
       {
@@ -103,7 +98,6 @@
         name: "Mantenimiento & Soporte",
         desc: "Tu sistema siempre al día: copias de seguridad, actualizaciones, seguridad y soporte cuando lo necesitas.",
         features: ["Backups automáticos", "Monitorización 24/7", "Actualizaciones y parches", "Soporte prioritario"],
-        price: "desde $99/mes",
         featured: false
       }
     ],
@@ -290,7 +284,6 @@
         name: "Websites für Unternehmen",
         desc: "Ihre professionelle digitale Präsenz: schnell, sicher und darauf ausgelegt, Besucher in Kunden zu verwandeln.",
         features: ["Premium-Design nach Mass", "Ultraschnelles Laden (Core Web Vitals)", "SEO ab dem ersten Tag", "Panel zur Bearbeitung Ihrer Inhalte"],
-        price: "ab $349",
         featured: false
       },
       {
@@ -298,7 +291,6 @@
         name: "E-Commerce & Online-Shops",
         desc: "Komplette Shops mit echten Zahlungen, Rechnungen, Inventar und Mehrsprachigkeit. Die Plattform, die unsere Kunden bereits nutzen.",
         features: ["Zahlungen: Karte, PayPal, Krypto u. v. m.", "Inventar und Lagerbestand automatisch", "Rechnungen und Reports", "6 Sprachen ab dem ersten Tag"],
-        price: "ab $899",
         featured: true
       },
       {
@@ -306,7 +298,6 @@
         name: "Inventarsysteme",
         desc: "Kontrollieren Sie Lagerbestand, Lieferanten und Nachbestell-Warnungen in Echtzeit. Verlieren Sie nie wieder einen Verkauf wegen fehlendem Bestand.",
         features: ["Bestand in Echtzeit", "Nachbestell-Warnungen", "Bewegungs-Ledger", "Lieferanten und Bestellungen"],
-        price: "ab $699",
         featured: false
       },
       {
@@ -314,7 +305,6 @@
         name: "SEO & Digital-Marketing",
         desc: "Holen Sie sich qualifizierten Traffic und konvertieren Sie. Positionierung, Kampagnen und Analysen mit klaren monatlichen Reports.",
         features: ["Technisches & inhaltliches SEO", "Social-Media-Kampagnen", "Google Analytics & Search Console", "Monatliche Reports"],
-        price: "ab $249/Monat",
         featured: false
       },
       {
@@ -322,7 +312,6 @@
         name: "Massgeschneiderte Systeme & Apps",
         desc: "Software, die in keinem Katalog steht: Automatisierungen, Dashboards, Integrationen und APIs für Ihren Betrieb.",
         features: ["Prozess-Automatisierung", "Kontroll-Dashboards", "Integration Ihrer Tools", "Skalierbar ab dem ersten Tag"],
-        price: "nach Mass",
         featured: false
       },
       {
@@ -330,7 +319,6 @@
         name: "Wartung & Support",
         desc: "Ihr System immer aktuell: Backups, Updates, Sicherheit und Support, wenn Sie ihn brauchen.",
         features: ["Automatische Backups", "24/7-Überwachung", "Updates und Patches", "Prioritäts-Support"],
-        price: "ab $99/Monat",
         featured: false
       }
     ],

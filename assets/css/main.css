@@ -361,11 +361,6 @@ main, footer { position: relative; z-index: 1; }
   display: flex; gap: 9px; align-items: center;
 }
 .svc-feats li::before { content: '✓'; color: var(--lime); font-size: 11px; text-shadow: 0 0 8px rgba(216, 184, 120, 0.6); }
-.svc-price {
-  display: inline-block; font-family: var(--mono); font-size: 13px; color: var(--text);
-  border: 1px solid var(--line-2); border-radius: 100px; padding: 7px 14px;
-  background: rgba(255, 255, 255, 0.03); position: relative; z-index: 1;
-}
 
 .svc-featured {
   grid-column: span 2;

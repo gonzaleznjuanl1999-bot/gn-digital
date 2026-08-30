@@ -125,7 +125,6 @@
         '<h3 class="svc-name">' + esc(s.name) + '</h3>' +
         '<p class="svc-desc">' + esc(s.desc) + '</p>' +
         '<ul class="svc-feats">' + feats + '</ul>' +
-        '<span class="svc-price">' + esc(s.price) + '</span>' +
         '</article>';
     }).join('');
   }
