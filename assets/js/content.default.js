@@ -218,7 +218,7 @@
       }
     ],
     contact: {
-      email: "hola@gndigital.tech",
+      email: "gntecnologydigital@gmail.com",
       phone: "+58 424 5761431",
       whatsapp: "584245761431",
       city: "Nivel mundial · Trabajamos en remoto",
@@ -445,7 +445,7 @@
       }
     ],
     contact: {
-      email: "hola@gndigital.tech",
+      email: "gntecnologydigital@gmail.com",
       phone: "+58 424 5761431",
       whatsapp: "584245761431",
       city: "Weltweit · Remote-Arbeit",
