@@ -26,14 +26,18 @@
         <span class="nav-logo-text"><b data-k="brand.short">GN</b><i data-k="brand.name">GN Digital Technology</i></span>
       </a>
       <nav class="nav-links" aria-label="Principal">
-        <a href="#servicios" data-link>Servicios</a>
-        <a href="#trabajo" data-link>Trabajo</a>
-        <a href="#proceso" data-link>Proceso</a>
-        <a href="#testimonios" data-link>Testimonios</a>
-        <a href="#contacto" data-link>Contacto</a>
+        <a href="#servicios" data-link data-k="labels.navServicios">Servicios</a>
+        <a href="#trabajo" data-link data-k="labels.navTrabajo">Trabajo</a>
+        <a href="#proceso" data-link data-k="labels.navProceso">Proceso</a>
+        <a href="#testimonios" data-link data-k="labels.navTestimonios">Testimonios</a>
+        <a href="#contacto" data-link data-k="labels.navContacto">Contacto</a>
       </nav>
       <div class="nav-right">
         <span class="nav-status"><i class="dot"></i><span data-k="brand.status">Disponible para nuevos proyectos</span></span>
+        <div class="lang-switch" role="group" aria-label="Idioma">
+          <button type="button" data-lang="es" aria-label="Español">ES</button>
+          <button type="button" data-lang="de" aria-label="Deutsch">DE</button>
+        </div>
         <a class="btn btn-ghost btn-sm nav-admin" href="admin.html" target="_blank" rel="noopener" aria-label="Abrir panel de administración">⚙ Admin</a>
         <a class="btn btn-sm btn-primary" href="#contacto" data-link><span data-k="hero.cta1">Iniciar mi proyecto</span> →</a>
         <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false"><span></span><span></span><span></span></button>
@@ -43,11 +47,11 @@
 
   <div class="mobile-menu" id="mobileMenu" hidden>
     <nav aria-label="Móvil">
-      <a href="#servicios" data-link>Servicios</a>
-      <a href="#trabajo" data-link>Trabajo</a>
-      <a href="#proceso" data-link>Proceso</a>
-      <a href="#testimonios" data-link>Testimonios</a>
-      <a href="#contacto" data-link>Contacto</a>
+      <a href="#servicios" data-link data-k="labels.navServicios">Servicios</a>
+      <a href="#trabajo" data-link data-k="labels.navTrabajo">Trabajo</a>
+      <a href="#proceso" data-link data-k="labels.navProceso">Proceso</a>
+      <a href="#testimonios" data-link data-k="labels.navTestimonios">Testimonios</a>
+      <a href="#contacto" data-link data-k="labels.navContacto">Contacto</a>
       <a class="btn btn-ghost" href="admin.html" target="_blank" rel="noopener">⚙ Admin</a>
       <a class="btn btn-primary" href="#contacto" data-link><span data-k="hero.cta1">Iniciar mi proyecto</span> →</a>
     </nav>
@@ -81,9 +85,9 @@
               <a class="btn btn-primary" href="#contacto" data-link><span data-k="hero.cta1">Iniciar mi proyecto</span> <span class="btn-arrow">→</span></a>
               <a class="btn btn-ghost" href="#servicios" data-link><span data-k="hero.cta2">Ver servicios</span></a>
             </div>
-            <div class="hero-trust r-up">
-              <span>✓ Panel de edición incluido</span><span>✓ Sin plantillas genéricas</span><span>✓ Soporte real</span>
-            </div>
+          <div class="hero-trust r-up">
+            <span data-k="labels.trust1">✓ Panel de edición incluido</span><span data-k="labels.trust2">✓ Sin plantillas genéricas</span><span data-k="labels.trust3">✓ Soporte real</span>
+          </div>
           </div>
 
           <div class="terminal r-up" aria-label="Terminal de demostración">
@@ -98,7 +102,7 @@
         </div>
       </div>
 
-      <div class="scroll-cue" aria-hidden="true"><span>scroll</span><i></i></div>
+      <div class="scroll-cue" aria-hidden="true"><span data-k="labels.scroll">scroll</span><i></i></div>
     </section>
 
     <!-- ===== MARQUEE ===== -->
@@ -111,9 +115,9 @@
     <section id="servicios" class="section">
       <div class="wrap">
         <div class="sec-head">
-          <div class="sec-eyebrow mono reveal">// 01 · SERVICIOS</div>
-          <h2 class="sec-title reveal">Todo lo que tu negocio <span class="grad">necesita en digital</span></h2>
-          <p class="sec-desc reveal">Diseñamos, construimos y mantenemos sistemas completos. Un solo equipo para tu presencia online, tus ventas y tu operación.</p>
+          <div class="sec-eyebrow mono reveal" data-k="labels.s1Eyebrow">// 01 · SERVICIOS</div>
+          <h2 class="sec-title reveal"><span data-k="labels.s1T1">Todo lo que tu negocio</span> <span class="grad" data-k="labels.s1T2">necesita en digital</span></h2>
+          <p class="sec-desc reveal" data-k="labels.s1Desc">Diseñamos, construimos y mantenemos sistemas completos. Un solo equipo para tu presencia online, tus ventas y tu operación.</p>
         </div>
         <div class="services-grid" id="servicesGrid"></div>
       </div>
@@ -128,9 +132,9 @@
     <section id="trabajo" class="section">
       <div class="wrap">
         <div class="sec-head">
-          <div class="sec-eyebrow mono reveal">// 02 · TRABAJO</div>
-          <h2 class="sec-title reveal">Sistemas en <span class="grad">producción real</span></h2>
-          <p class="sec-desc reveal">No prometemos: desplegamos. Estos son sistemas nuestros funcionando de verdad, con pagos, datos y usuarios reales.</p>
+          <div class="sec-eyebrow mono reveal" data-k="labels.s2Eyebrow">// 02 · TRABAJO</div>
+          <h2 class="sec-title reveal"><span data-k="labels.s2T1">Sistemas en</span> <span class="grad" data-k="labels.s2T2">producción real</span></h2>
+          <p class="sec-desc reveal" data-k="labels.s2Desc">No prometemos: desplegamos. Estos son sistemas nuestros funcionando de verdad, con pagos, datos y usuarios reales.</p>
         </div>
         <div class="work-grid" id="workGrid"></div>
       </div>
@@ -139,8 +143,8 @@
     <!-- ===== PROCESO ===== -->
     <section id="proceso" class="process" aria-label="Proceso">
       <div class="wrap process-head">
-        <div class="sec-eyebrow mono">// 03 · PROCESO</div>
-        <h2 class="sec-title">De la idea al lanzamiento <span class="grad">sin fricción</span></h2>
+        <div class="sec-eyebrow mono" data-k="labels.s3Eyebrow">// 03 · PROCESO</div>
+        <h2 class="sec-title"><span data-k="labels.s3T1">De la idea al lanzamiento</span> <span class="grad" data-k="labels.s3T2">sin fricción</span></h2>
       </div>
       <div class="wrap process-track" id="processTrack"></div>
     </section>
@@ -149,8 +153,8 @@
     <section id="testimonios" class="section">
       <div class="wrap">
         <div class="sec-head">
-          <div class="sec-eyebrow mono reveal">// 04 · TESTIMONIOS</div>
-          <h2 class="sec-title reveal">Clientes que ya <span class="grad">venden en digital</span></h2>
+          <div class="sec-eyebrow mono reveal" data-k="labels.s4Eyebrow">// 04 · TESTIMONIOS</div>
+          <h2 class="sec-title reveal"><span data-k="labels.s4T1">Clientes que ya</span> <span class="grad" data-k="labels.s4T2">venden en digital</span></h2>
         </div>
       </div>
       <div class="t-row" id="tRow1"></div>
@@ -161,12 +165,12 @@
     <section id="contacto" class="cta">
       <div class="cta-glow-bg" aria-hidden="true"></div>
       <div class="wrap cta-inner">
-        <div class="sec-eyebrow mono">// 05 · CONTACTO</div>
-        <h2 class="cta-title">¿Construimos <span class="grad">lo tuyo</span>?</h2>
-        <p class="cta-sub">Cuéntanos tu idea o tu problema. En 24h te respondemos con un plan claro, precio y tiempo de entrega.</p>
+        <div class="sec-eyebrow mono" data-k="labels.ctaEyebrow">// 05 · CONTACTO</div>
+        <h2 class="cta-title"><span data-k="labels.ctaT1">¿Construimos</span> <span class="grad" data-k="labels.ctaT2">lo tuyo</span>?</h2>
+        <p class="cta-sub" data-k="labels.ctaSub">Cuéntanos tu idea o tu problema. En 24h te respondemos con un plan claro, precio y tiempo de entrega.</p>
         <div class="cta-btns">
-          <a class="btn btn-lime" id="ctaWhatsapp" target="_blank" rel="noopener">💬 WhatsApp</a>
-          <a class="btn btn-primary" id="ctaMail" href="mailto:hola@gndigital.tech">✉ Escríbenos un email</a>
+          <a class="btn btn-lime" id="ctaWhatsapp" target="_blank" rel="noopener" data-k="labels.ctaWhatsapp">💬 WhatsApp</a>
+          <a class="btn btn-primary" id="ctaMail" href="mailto:hola@gndigital.tech" data-k="labels.ctaEmail">✉ Escríbenos un email</a>
         </div>
         <div class="contact-cards" id="contactCards"></div>
       </div>
@@ -185,24 +189,24 @@
         <div class="foot-socials" id="footSocials"></div>
       </div>
       <div class="foot-col">
-        <h4>Navegación</h4>
-        <a href="#servicios" data-link>Servicios</a>
-        <a href="#trabajo" data-link>Trabajo</a>
-        <a href="#proceso" data-link>Proceso</a>
-        <a href="#testimonios" data-link>Testimonios</a>
+        <h4 data-k="labels.footNav">Navegación</h4>
+        <a href="#servicios" data-link data-k="labels.navServicios">Servicios</a>
+        <a href="#trabajo" data-link data-k="labels.navTrabajo">Trabajo</a>
+        <a href="#proceso" data-link data-k="labels.navProceso">Proceso</a>
+        <a href="#testimonios" data-link data-k="labels.navTestimonios">Testimonios</a>
       </div>
       <div class="foot-col">
-        <h4>Servicios</h4>
+        <h4 data-k="labels.footServices">Servicios</h4>
         <span id="footServices"></span>
       </div>
       <div class="foot-col">
-        <h4>Contacto</h4>
+        <h4 data-k="labels.footContact">Contacto</h4>
         <span id="footContact"></span>
       </div>
     </div>
     <div class="wrap foot-bottom">
-      <span>© <span id="year">2026</span> GN Digital Technology · Todos los derechos reservados</span>
-      <span class="mono">Hecho con precisión · <a href="admin.html" rel="noopener" class="foot-admin">admin →</a></span>
+      <span>© <span id="year">2026</span> <span data-k="brand.name">gntecnologydigital</span> · <span data-k="labels.footRights">Todos los derechos reservados</span></span>
+      <span class="mono">⚡ <a href="admin.html" rel="noopener" class="foot-admin">admin →</a></span>
     </div>
   </footer>
 

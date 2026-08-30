@@ -82,8 +82,49 @@
       { key: 'title', label: 'Título de la página', type: 'text' },
       { key: 'description', label: 'Descripción (meta)', type: 'textarea' },
       { key: 'ogImage', label: 'Imagen para compartir (OG)', type: 'image' }
+    ]},
+    { key: 'labels', label: 'Textos UI', icon: '✎', desc: 'Menú, títulos de sección, CTA y pie (español)', fields: [
+      { key: 'navServicios', label: 'Menú · Servicios', type: 'text' },
+      { key: 'navTrabajo', label: 'Menú · Trabajo', type: 'text' },
+      { key: 'navProceso', label: 'Menú · Proceso', type: 'text' },
+      { key: 'navTestimonios', label: 'Menú · Testimonios', type: 'text' },
+      { key: 'navContacto', label: 'Menú · Contacto', type: 'text' },
+      { key: 'trust1', label: 'Hero · confianza 1', type: 'text' },
+      { key: 'trust2', label: 'Hero · confianza 2', type: 'text' },
+      { key: 'trust3', label: 'Hero · confianza 3', type: 'text' },
+      { key: 's1Eyebrow', label: 'Servicios · etiqueta', type: 'text' },
+      { key: 's1T1', label: 'Servicios · título parte 1', type: 'text' },
+      { key: 's1T2', label: 'Servicios · título parte 2', type: 'text' },
+      { key: 's1Desc', label: 'Servicios · descripción', type: 'textarea' },
+      { key: 's2Eyebrow', label: 'Trabajo · etiqueta', type: 'text' },
+      { key: 's2T1', label: 'Trabajo · título parte 1', type: 'text' },
+      { key: 's2T2', label: 'Trabajo · título parte 2', type: 'text' },
+      { key: 's2Desc', label: 'Trabajo · descripción', type: 'textarea' },
+      { key: 's3Eyebrow', label: 'Proceso · etiqueta', type: 'text' },
+      { key: 's3T1', label: 'Proceso · título parte 1', type: 'text' },
+      { key: 's3T2', label: 'Proceso · título parte 2', type: 'text' },
+      { key: 's4Eyebrow', label: 'Testimonios · etiqueta', type: 'text' },
+      { key: 's4T1', label: 'Testimonios · título parte 1', type: 'text' },
+      { key: 's4T2', label: 'Testimonios · título parte 2', type: 'text' },
+      { key: 'ctaEyebrow', label: 'Contacto · etiqueta', type: 'text' },
+      { key: 'ctaT1', label: 'Contacto · título parte 1', type: 'text' },
+      { key: 'ctaT2', label: 'Contacto · título parte 2', type: 'text' },
+      { key: 'ctaSub', label: 'Contacto · subtítulo', type: 'textarea' },
+      { key: 'ctaWhatsapp', label: 'Botón WhatsApp', type: 'text' },
+      { key: 'ctaEmail', label: 'Botón email', type: 'text' },
+      { key: 'scroll', label: 'Indicador de scroll', type: 'text' },
+      { key: 'footNav', label: 'Pie · Navegación', type: 'text' },
+      { key: 'footServices', label: 'Pie · Servicios', type: 'text' },
+      { key: 'footContact', label: 'Pie · Contacto', type: 'text' },
+      { key: 'footRights', label: 'Pie · derechos', type: 'text' }
     ]}
   ];
+
+  // Variantes en alemán de todas las secciones (claves *_de)
+  var BASE_SECTIONS = SECTIONS.slice();
+  SECTIONS = SECTIONS.concat(BASE_SECTIONS.map(function (s) {
+    return Object.assign({}, s, { key: s.key + '_de', label: s.label + ' (DE)', desc: (s.desc || '') + ' — alemán' });
+  }));
 
   // ---------- Helpers ----------
   function $(sel, root) { return (root || document).querySelector(sel); }

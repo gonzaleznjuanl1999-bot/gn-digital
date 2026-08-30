@@ -7,8 +7,17 @@
 
   var gsapOk = typeof window.gsap !== 'undefined' && typeof window.ScrollTrigger !== 'undefined';
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var CONTENT = (typeof window.GN_CONTENT !== 'undefined' && window.GN_CONTENT) || {};
+
+  // ---------- idioma ----------
+  var urlLang = new URLSearchParams(window.location.search).get('lang');
+  var storedLang = null;
+  try { storedLang = localStorage.getItem('gn:lang'); } catch (e) { /* privado */ }
+  var browserDe = (navigator.language || '').toLowerCase().indexOf('de') === 0;
+  var LANG = (urlLang && (urlLang === 'es' || urlLang === 'de')) ? urlLang : (storedLang || (browserDe ? 'de' : 'es'));
+
+  var CONTENT = (LANG === 'de' ? window.GN_CONTENT_DE : window.GN_CONTENT) || {};
   var merged = deepClone(CONTENT);
+  document.documentElement.lang = LANG;
 
   // ---------- utilidades ----------
   function deepClone(o) { return JSON.parse(JSON.stringify(o || {})); }
@@ -58,7 +67,14 @@
       .then(function (r) { return r.ok ? r.json() : Promise.reject(new Error('no api')); })
       .then(function (remote) {
         if (remote && typeof remote === 'object') {
-          Object.keys(remote).forEach(function (k) { merged[k] = remote[k]; });
+          Object.keys(remote).forEach(function (k) {
+            // el contenido del idioma activo está en la clave plana (es) o *_de
+            if (k.slice(-3) === '_de') {
+              if (LANG === 'de') merged[k.slice(0, -3)] = remote[k];
+            } else {
+              if (LANG !== 'de') merged[k] = remote[k];
+            }
+          });
         }
         return merged;
       })
@@ -309,13 +325,24 @@
   }
 
   // ============================================================
-  // UI: nav / menú / glow
+  // UI: nav / menú / glow / idioma
   // ============================================================
   function initUI() {
     var nav = $('#nav'), burger = $('#burger'), menu = $('#mobileMenu');
     var onScroll = function () { nav.classList.toggle('scrolled', window.scrollY > 30); };
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
+
+    // selector de idioma: marca el activo y cambia con recarga
+    $all('.lang-switch button').forEach(function (b) {
+      b.classList.toggle('active', b.getAttribute('data-lang') === LANG);
+      b.addEventListener('click', function () {
+        var next = b.getAttribute('data-lang');
+        if (next === LANG) return;
+        try { localStorage.setItem('gn:lang', next); } catch (e) { /* privado */ }
+        window.location.search = 'lang=' + next;
+      });
+    });
 
     if (burger && menu) {
       burger.addEventListener('click', function () {

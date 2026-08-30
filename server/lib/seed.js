@@ -9,7 +9,13 @@ const bcrypt = require('bcryptjs');
 const path = require('path');
 
 const ROOT = path.join(__dirname, '..', '..');
-const DEFAULT_CONTENT = require(path.join(ROOT, 'assets', 'js', 'content.default.js'));
+const CONTENT = require(path.join(ROOT, 'assets', 'js', 'content.default.js'));
+
+// Claves planas: secciones en español + alemán con sufijo _de
+const DEFAULT_CONTENT = Object.assign({}, CONTENT.es);
+for (const [key, value] of Object.entries(CONTENT.de)) {
+  DEFAULT_CONTENT[key + '_de'] = value;
+}
 
 const USERS_KEY = 'gn:users';
 const CONTENT_PREFIX = 'gn:content:';
