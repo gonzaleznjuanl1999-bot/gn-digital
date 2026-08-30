@@ -2,8 +2,8 @@
 // routes/upload.js · Subida de imágenes a Supabase Storage (gn-media)
 //   POST /api/upload  (requireAdmin)  body: { data: base64, type }
 //   → { ok, url, name }
-// Sin Supabase → guarda en la DB (gn_kv) y sirve por /api/uploaded/:key.
-// El bucket se crea automáticamente al arrancar si no existe.
+// Sin Supabase → guarda en el store (gn:img:{key}) y sirve por
+// /api/uploaded/:key. El bucket se crea automáticamente al arrancar.
 // ============================================================
 'use strict';
 const express = require('express');
@@ -46,20 +46,19 @@ function ensureBucket() {
   return bucketPromise;
 }
 
-function register(database) {
+function register(store) {
   const router = express.Router();
 
   router.get('/uploaded/:key', async (req, res) => {
     const key = String(req.params.key || '').replace(/[^a-zA-Z0-9_-]/g, '');
     if (!key) return res.status(400).json({ error: 'bad_key' });
     try {
-      const row = await database.get('SELECT data FROM gn_kv WHERE file = ?', ['uploaded:' + key]);
+      const row = await store.get('gn:img:' + key);
       if (!row) return res.status(404).json({ error: 'not_found' });
-      const j = JSON.parse(row.data);
-      const buf = Buffer.from(String(j.b || ''), 'base64');
+      const buf = Buffer.from(String(row.b || ''), 'base64');
       if (!buf.length) return res.status(404).json({ error: 'not_found' });
       res.setHeader('Cache-Control', 'public, max-age=31536000, immutable');
-      res.setHeader('Content-Type', String(j.t || 'image/jpeg'));
+      res.setHeader('Content-Type', String(row.t || 'image/jpeg'));
       res.setHeader('X-Content-Type-Options', 'nosniff');
       res.send(buf);
     } catch (e) {
@@ -81,13 +80,10 @@ function register(database) {
     if (!buf.length || buf.length > MAX_BYTES) return res.status(400).json({ error: 'bad_data' });
 
     if (!SUPABASE_URL || !SERVICE_ROLE) {
-      // Sin Supabase → imagen en la DB, servida por /api/uploaded/:key
+      // Sin Supabase → imagen en el store, servida por /api/uploaded/:key
       const key = crypto.randomBytes(8).toString('hex');
       try {
-        await database.run(
-          'INSERT INTO gn_kv (file, data, updated_at) VALUES (?, ?, ?) ON CONFLICT(file) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at',
-          ['uploaded:' + key, JSON.stringify({ t: type, b: base64 }), new Date().toISOString()]
-        );
+        await store.set('gn:img:' + key, { t: type, b: base64 });
         const url = `${req.protocol}://${req.get('host')}/api/uploaded/${key}`;
         return res.json({ ok: true, url, name: key, storage: 'db' });
       } catch (e) {

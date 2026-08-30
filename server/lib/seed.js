@@ -1,7 +1,8 @@
 // ============================================================
-// seed.js · Esquema + seed inicial (users admin + contenido por defecto)
+// seed.js · Seed inicial (admin + contenido por defecto)
 // El contenido por defecto vive en assets/js/content.default.js
-// (una sola fuente de verdad: el navegador y el servidor la leen).
+// (una sola fuente de verdad: navegador y servidor la leen).
+// Claves: gn:users (array) · gn:content:{seccion} · gn:img:{key}
 // ============================================================
 'use strict';
 const bcrypt = require('bcryptjs');
@@ -10,59 +11,61 @@ const path = require('path');
 const ROOT = path.join(__dirname, '..', '..');
 const DEFAULT_CONTENT = require(path.join(ROOT, 'assets', 'js', 'content.default.js'));
 
-const DDL = `
-CREATE TABLE IF NOT EXISTS gn_content (
-  key TEXT PRIMARY KEY,
-  data TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS gn_users (
-  id TEXT PRIMARY KEY,
-  username TEXT NOT NULL UNIQUE,
-  pass_hash TEXT NOT NULL,
-  role TEXT NOT NULL DEFAULT 'admin',
-  name TEXT DEFAULT '',
-  refresh_jti TEXT DEFAULT '',
-  created_at TEXT NOT NULL
-);
-CREATE TABLE IF NOT EXISTS gn_kv (
-  file TEXT PRIMARY KEY,
-  data TEXT NOT NULL,
-  updated_at TEXT NOT NULL
-);
-`;
+const USERS_KEY = 'gn:users';
+const CONTENT_PREFIX = 'gn:content:';
 
-async function ensure(database) {
-  await database.exec(DDL);
-}
-
-async function seedAll(database) {
+async function seedAll(store) {
   let seeded = 0;
 
   // --- Usuario admin por defecto: admin / admin123 ---
-  const adminRow = await database.get('SELECT id FROM gn_users WHERE username = ?', ['admin']);
-  if (!adminRow) {
-    const passHash = bcrypt.hashSync('admin123', 10);
-    await database.run(
-      'INSERT INTO gn_users (id, username, pass_hash, role, name, refresh_jti, created_at) VALUES (?, ?, ?, ?, ?, ?, ?)',
-      ['u-admin', 'admin', passHash, 'owner', 'GN Admin', '', new Date().toISOString()]
-    );
+  const users = (await store.get(USERS_KEY)) || [];
+  if (!users.length) {
+    users.push({
+      id: 'u-admin',
+      username: 'admin',
+      pass_hash: bcrypt.hashSync('admin123', 10),
+      role: 'owner',
+      name: 'GN Admin',
+      refresh_jti: '',
+      created_at: new Date().toISOString(),
+    });
+    await store.set(USERS_KEY, users);
     seeded++;
   }
 
-  // --- Contenido por defecto (solo si la tabla está vacía) ---
-  const any = await database.get('SELECT key FROM gn_content LIMIT 1');
-  if (!any) {
-    const ts = new Date().toISOString();
-    for (const [key, data] of Object.entries(DEFAULT_CONTENT)) {
-      await database.run(
-        'INSERT INTO gn_content (key, data, updated_at) VALUES (?, ?, ?)',
-        [key, JSON.stringify(data), ts]
-      );
+  // --- Contenido por defecto (solo si la sección no existe) ---
+  for (const [key, data] of Object.entries(DEFAULT_CONTENT)) {
+    const existing = await store.get(CONTENT_PREFIX + key);
+    if (!existing) {
+      await store.set(CONTENT_PREFIX + key, data);
       seeded++;
     }
   }
   return seeded;
 }
 
-module.exports = { ensure, seedAll, DEFAULT_CONTENT };
+async function resetSection(store, key) {
+  if (!(key in DEFAULT_CONTENT)) return false;
+  await store.set(CONTENT_PREFIX + key, DEFAULT_CONTENT[key]);
+  return true;
+}
+
+async function loadAll(store) {
+  const rows = await store.list(CONTENT_PREFIX);
+  const out = {};
+  for (const row of rows) {
+    const key = row.key.slice(CONTENT_PREFIX.length);
+    if (key) out[key] = row.d;
+  }
+  return out;
+}
+
+async function loadSection(store, key) {
+  return store.get(CONTENT_PREFIX + key);
+}
+
+async function saveSection(store, key, data) {
+  await store.set(CONTENT_PREFIX + key, data);
+}
+
+module.exports = { seedAll, resetSection, loadAll, loadSection, saveSection, USERS_KEY, DEFAULT_CONTENT };

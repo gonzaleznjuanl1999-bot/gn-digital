@@ -4,7 +4,6 @@
 //   GET  /api/content/:key      → { key, data } (público)
 //   PUT  /api/content/:key      → upsert (admin)
 //   POST /api/content/:key/reset→ restaura el seed (admin)
-//   GET  /api/content/meta      → marcas de tiempo (público, ligero)
 // ============================================================
 'use strict';
 const express = require('express');
@@ -13,36 +12,18 @@ const seedLib = require('../lib/seed');
 
 const MAX_BODY = 256 * 1024; // ~250 KB por sección
 
-function register(database) {
+function register(store) {
   const router = express.Router();
 
-  async function readKey(key) {
-    const row = await database.get('SELECT data FROM gn_content WHERE key = ?', [key]);
-    if (!row) return null;
-    try { return JSON.parse(row.data); } catch (e) { return null; }
-  }
-
   router.get('/content', async (req, res) => {
-    const rows = await database.all('SELECT key, data FROM gn_content');
-    const out = {};
-    for (const r of rows) {
-      try { out[r.key] = JSON.parse(r.data); } catch (e) { /* fila corrupta */ }
-    }
-    res.json(out);
-  });
-
-  router.get('/content/meta', async (req, res) => {
-    const rows = await database.all('SELECT key, updated_at FROM gn_content');
-    const out = {};
-    for (const r of rows) out[r.key] = r.updated_at;
-    res.json(out);
+    res.json(await seedLib.loadAll(store));
   });
 
   router.get('/content/:key', async (req, res) => {
     const key = String(req.params.key || '').replace(/[^a-zA-Z0-9_-]/g, '');
     if (!key) return res.status(400).json({ error: 'bad_key' });
-    const data = await readKey(key);
-    if (data === null) return res.status(404).json({ error: 'not_found' });
+    const data = await seedLib.loadSection(store, key);
+    if (data === null || data === undefined) return res.status(404).json({ error: 'not_found' });
     res.json({ key, data });
   });
 
@@ -54,21 +35,15 @@ function register(database) {
     const raw = JSON.stringify(data);
     if (raw.length > MAX_BODY) return res.status(400).json({ error: 'too_large' });
     if (!(key in seedLib.DEFAULT_CONTENT)) return res.status(404).json({ error: 'unknown_section' });
-    await database.run(
-      'INSERT INTO gn_content (key, data, updated_at) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at',
-      [key, raw, new Date().toISOString()]
-    );
+    await seedLib.saveSection(store, key, data);
     res.json({ ok: true, key });
   });
 
   router.post('/content/:key/reset', auth.requireAdmin, async (req, res) => {
     const key = String(req.params.key || '').replace(/[^a-zA-Z0-9_-]/g, '');
     if (!key) return res.status(400).json({ error: 'bad_key' });
-    if (!(key in seedLib.DEFAULT_CONTENT)) return res.status(404).json({ error: 'unknown_section' });
-    await database.run(
-      'INSERT INTO gn_content (key, data, updated_at) VALUES (?, ?, ?) ON CONFLICT(key) DO UPDATE SET data = excluded.data, updated_at = excluded.updated_at',
-      [key, JSON.stringify(seedLib.DEFAULT_CONTENT[key]), new Date().toISOString()]
-    );
+    const ok = await seedLib.resetSection(store, key);
+    if (!ok) return res.status(404).json({ error: 'unknown_section' });
     res.json({ ok: true, key });
   });
 

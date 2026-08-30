@@ -1,9 +1,9 @@
 // ============================================================
 // server.js · API + estáticos (GN Digital Technology)
 // Arranque local: node server/server.js  →  http://localhost:8765/
-// Producción:     DATABASE_URL=postgres://... node server/server.js
+// Producción:     SUPABASE_URL + SUPABASE_SERVICE_ROLE → PostgREST kv
 // Serverless (Vercel): module.exports es el handler (req, res) →
-// getApp() inicializa DB+seed+app una sola vez por instancia.
+// getApp() inicializa store+seed+app una sola vez por instancia.
 // ============================================================
 'use strict';
 const path = require('path');
@@ -11,7 +11,7 @@ const fs = require('fs');
 const express = require('express');
 const cookieParser = require('cookie-parser');
 
-const dbLib = require('./lib/db');
+const storeLib = require('./lib/store');
 const seed = require('./lib/seed');
 const authRoutes = require('./routes/auth');
 const contentRoutes = require('./routes/content');
@@ -40,21 +40,21 @@ function securityHeaders(app) {
   });
 }
 
-function buildApp(database) {
+function buildApp(store) {
   const app = express();
   app.disable('x-powered-by');
   app.set('trust proxy', 1);
   securityHeaders(app);
   // /api/upload lleva su propio parser (hasta 8mb)
-  app.use('/api', uploadRoutes.register(database));
+  app.use('/api', uploadRoutes.register(store));
   app.use(express.json({ limit: '2mb' }));
   app.use(cookieParser());
 
   app.get('/api/health', (req, res) => {
-    res.json({ ok: true, db: database.kind, time: new Date().toISOString() });
+    res.json({ ok: true, db: store.kind, time: new Date().toISOString() });
   });
-  app.use('/api/auth', authRoutes.register(database));
-  app.use('/api', contentRoutes.register(database));
+  app.use('/api/auth', authRoutes.register(store));
+  app.use('/api', contentRoutes.register(store));
 
   app.get('/robots.txt', (req, res) => {
     const base = req.protocol + '://' + req.get('host');
@@ -107,12 +107,11 @@ function buildApp(database) {
 let appPromise = null;
 async function getApp() {
   if (!appPromise) {
-    const database = await dbLib.init();
-    await seed.ensure(database);
-    const seeded = await seed.seedAll(database);
+    const store = await storeLib.init();
+    const seeded = await seed.seedAll(store);
     await uploadRoutes.ensureBucket();
-    appPromise = buildApp(database);
-    appPromise.locals.database = database;
+    appPromise = buildApp(store);
+    appPromise.locals.store = store;
     appPromise.locals.seeded = seeded;
   }
   return appPromise;
@@ -121,9 +120,9 @@ async function getApp() {
 async function main() {
   const app = await getApp();
   const server = app.listen(PORT, () => {
-    console.log(`[gn] http://localhost:${PORT} · db=${app.locals.database.kind}`);
+    console.log(`[gn] http://localhost:${PORT} · store=${app.locals.store.kind}`);
   });
-  return { app, server, database: app.locals.database };
+  return { app, server, store: app.locals.store };
 }
 
 if (require.main === module) {
