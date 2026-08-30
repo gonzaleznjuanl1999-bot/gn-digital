@@ -124,7 +124,7 @@
         category: "E-commerce",
         desc: "Plataforma multi-idioma con 6 idiomas, multi-tienda, pagos reales, facturas PDF e inventario en tiempo real.",
         image: "assets/img/work/tienda.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app",
         tags: ["E-commerce", "6 idiomas", "Pagos reales", "PWA"]
       },
       {
@@ -350,7 +350,7 @@
         category: "E-Commerce",
         desc: "Mehrsprachige Plattform mit 6 Sprachen, Multi-Store, echten Zahlungen, PDF-Rechnungen und Inventar in Echtzeit.",
         image: "assets/img/work/tienda.webp",
-        url: "",
+        url: "https://tienda-universal-gonzaleznjuanl1999-3553s-projects.vercel.app",
         tags: ["E-Commerce", "6 Sprachen", "Echte Zahlungen", "PWA"]
       },
       {

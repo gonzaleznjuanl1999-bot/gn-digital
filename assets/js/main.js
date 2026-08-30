@@ -9,11 +9,12 @@
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // ---------- idioma ----------
+  // Por defecto ALEMÁN (mercado: Suiza de habla alemana). El selector
+  // ES|DE y ?lang= permiten cambiar manualmente.
   var urlLang = new URLSearchParams(window.location.search).get('lang');
   var storedLang = null;
   try { storedLang = localStorage.getItem('gn:lang'); } catch (e) { /* privado */ }
-  var browserDe = (navigator.language || '').toLowerCase().indexOf('de') === 0;
-  var LANG = (urlLang && (urlLang === 'es' || urlLang === 'de')) ? urlLang : (storedLang || (browserDe ? 'de' : 'es'));
+  var LANG = (urlLang && (urlLang === 'es' || urlLang === 'de')) ? urlLang : (storedLang || 'de');
 
   var CONTENT = (LANG === 'de' ? window.GN_CONTENT_DE : window.GN_CONTENT) || {};
   var merged = deepClone(CONTENT);
