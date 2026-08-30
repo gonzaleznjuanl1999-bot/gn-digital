@@ -157,51 +157,6 @@
     }).join('');
   }
 
-  // Carrusel del proceso: botones ‹ ›, puntos y contador (sin scroll-lock)
-  function initProcessCarousel() {
-    var viewport = $('.process-viewport');
-    var track = $('#processTrack');
-    var prev = $('#procPrev'), next = $('#procNext');
-    var count = $('#processCount'), dots = $('#processDots');
-    var steps = $all('.process-step', track);
-    if (!track || !steps.length) return;
-    var n = steps.length, index = 0;
-    dots.innerHTML = steps.map(function (_, i) {
-      return '<button type="button" data-dot="' + i + '" aria-label="Paso ' + (i + 1) + '"></button>';
-    }).join('');
-    var dotEls = $all('[data-dot]', dots);
-    function metrics() {
-      var card = steps[0].getBoundingClientRect();
-      var gap = parseFloat(getComputedStyle(track).gap) || 20;
-      return { cardW: card.width, gap: gap, vw: viewport.clientWidth };
-    }
-    function offset() {
-      var m = metrics();
-      return Math.max(0, (m.vw - m.cardW) / 2) - index * (m.cardW + m.gap);
-    }
-    function apply(animate) {
-      if (!animate) track.style.transition = 'none';
-      track.style.transform = 'translate3d(' + offset() + 'px, 0, 0)';
-      if (!animate) { void track.offsetHeight; track.style.transition = ''; }
-      count.textContent = String(index + 1).padStart(2, '0') + ' / ' + String(n).padStart(2, '0');
-      dotEls.forEach(function (d, i) { d.classList.toggle('active', i === index); });
-      if (prev) prev.disabled = index === 0;
-      if (next) next.disabled = index === n - 1;
-    }
-    function go(i) { if (i < 0 || i >= n) return; index = i; apply(true); }
-    if (prev) prev.addEventListener('click', function () { go(index - 1); });
-    if (next) next.addEventListener('click', function () { go(index + 1); });
-    dotEls.forEach(function (d) {
-      d.addEventListener('click', function () { go(parseInt(d.getAttribute('data-dot'), 10)); });
-    });
-    var rt = null;
-    window.addEventListener('resize', function () {
-      clearTimeout(rt);
-      rt = setTimeout(function () { apply(false); }, 150);
-    });
-    apply(false);
-  }
-
   function renderTestimonials() {
     var items = (merged.testimonials || []).filter(Boolean);
     var card = function (t) {
@@ -490,7 +445,6 @@
       initUI();
       playTerminal();
       initCanvas();
-      initProcessCarousel();
       initMotion();
       fitHeroTitle();
       if (document.fonts && document.fonts.ready) {
