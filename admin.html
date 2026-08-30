@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="icon" href="assets/img/brand/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/admin.css">
+  <title>GN Admin · Panel de contenido</title>
+</head>
+<body>
+
+  <!-- ===== LOGIN ===== -->
+  <div class="login" id="loginView">
+    <form class="login-card" id="loginForm">
+      <img src="assets/img/brand/logo.svg" alt="GN" width="52" height="52">
+      <h1>GN Admin</h1>
+      <p class="login-sub mono">Accede al panel de contenido</p>
+      <label>Usuario
+        <input type="text" name="username" autocomplete="username" required autofocus>
+      </label>
+      <label>Contraseña
+        <input type="password" name="password" autocomplete="current-password" required>
+      </label>
+      <button class="btn" type="submit">Acceder →</button>
+      <p class="login-err" id="loginErr" hidden></p>
+      <a class="login-back" href="index.html">← volver al sitio</a>
+    </form>
+  </div>
+
+  <!-- ===== PANEL ===== -->
+  <div class="shell" id="panelView" hidden>
+    <aside class="side">
+      <div class="side-head">
+        <img src="assets/img/brand/logo.svg" alt="GN" width="30" height="30">
+        <div><b>GN Admin</b><span class="mono">panel de contenido</span></div>
+      </div>
+      <nav class="side-nav" id="sideNav" aria-label="Secciones"></nav>
+      <div class="side-foot">
+        <a href="index.html" target="_blank" rel="noopener" class="mono">↗ Ver sitio</a>
+        <button class="mono" id="logoutBtn">⏻ Salir</button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1 id="sectionTitle">Cargando…</h1>
+          <p id="sectionDesc" class="mono"></p>
+        </div>
+        <div class="topbar-actions">
+          <span class="save-state mono" id="saveState">sin cambios</span>
+          <button class="btn btn-ghost" id="resetBtn" title="Restaurar contenido de fábrica de esta sección">↺ Restablecer</button>
+          <button class="btn btn-primary" id="saveBtn">💾 Guardar</button>
+        </div>
+      </header>
+
+      <section class="content" id="contentArea"></section>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" hidden></div>
+  <input type="file" id="fileInput" accept="image/png,image/jpeg,image/webp,image/gif" hidden>
+
+  <script src="assets/js/content.default.js"></script>
+  <script src="assets/js/admin.js"></script>
+</body>
+</html>
